@@ -1,0 +1,46 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+{{!-- <h1>{{info}}</h1> --}}
+<div class="nav">
+
+  <a href="/">/Start</a>
+  <a href="/product-create" class="active">/Product create</a>
+  <a href="/product-list">/Product list</a>
+  <a href="/product-edit">/Product edit</a>
+
+</div>
+{{!-- // ========================================= --}}
+<h1>Product create</h1>
+
+<div class="mCard">
+  <h2>Product information</h2>
+  <form method="POST" action="/product-create">
+
+    <div class="mCard__content">
+
+      <div class="mCard__field1">
+        <label for="name">Product name:</label>
+        <input type="text" name="name" required>
+      </div>
+
+      <div class="mCard__field2">
+        <label for="price">Price:</label>
+        <input type="number" name="price" required>
+      </div>
+
+      <div class="mCard__field3">
+        <label for="description">Description (displayed in the product card):</label>
+        <textarea type="text" name="description" class="description" required></textarea>
+      </div>
+
+    </div>
+
+    <button>Create</button>
+
+  </form>
+</div>
+
+{{!-- // ======================================== --}}

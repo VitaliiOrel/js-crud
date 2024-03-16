@@ -1,0 +1,70 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+{{!-- <h1>{{info}}</h1> --}}
+<div class="nav">
+
+  <a href="/">/Start</a>
+  <a href="/product-create">/Product create</a>
+  <a href="/product-list">/Product list</a>
+  <a href="/product-edit" class="active">/Product edit</a>
+
+</div>
+{{!-- // ======================================== --}}
+
+<h1>Product update</h1>
+
+{{!-- ======= S E A R C H ============= --}}
+<div class="mCard">
+
+  <div class="cardHeader">
+    <h2>Edit product
+      {{#if id}}ID: {{id}}{{/if}} {{#if info}}{{info}}{{/if}}</h2>
+    <div class="search">
+      <form method="POST" action="/product-search">
+        {{!-- <label for="id">Search by id:</label> --}}
+        <input type="number" name="id" class="headerInput">
+        <button class="searchButton">Search by ID</button>
+      </form>
+    </div>
+
+  </div>
+
+  {{!-- ================================================ --}}
+  <form method="POST" action="/product-edit">
+
+    <div class="mCard__content">
+
+      <div class="mCard__field1">
+        <label for="name">Product name:</label>
+        <input type="text" name="name" value='{{name}}'>
+      </div>
+
+      <div class="mCard__field2">
+        <label for="price">Price:</label>
+        <input type="number" name="price" value={{price}}>
+      </div>
+
+      <div class="mCard__fieldid">
+        <label for="id">id:</label>
+        <input type="number" name="id_disp" value={{id}} disabled readonly required>
+      </div>
+
+      <input type="hidden" name="id" value="{{id}}">
+
+      <div class="mCard__field3">
+        <label for="description">Description (displayed in the product card):</label>
+        <textarea type="text" name="description" class="description">{{description}}</textarea>
+      </div>
+
+    </div>
+
+    <button>Save</button>
+    <a href="/product-delete?id={{id}}">Delete</a>
+
+  </form>
+</div>
+
+{{!-- // ======================================== --}}
