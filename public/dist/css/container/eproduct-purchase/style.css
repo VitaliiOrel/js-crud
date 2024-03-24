@@ -1,0 +1,187 @@
+@charset "UTF-8";
+.nav {
+  height: 24px;
+  border-radius: 12px;
+  background-color: #808085;
+  margin-bottom: 24px;
+  margin-top: 12px;
+  border: 1px solid #3b3b3b;
+  font-weight: 100;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.nav a {
+  display: inline-block;
+  color: rgb(224, 224, 224);
+  box-sizing: border-box;
+  text-decoration: none;
+  margin-left: 12px;
+  line-height: 24px;
+  width: 120px;
+  text-align: center;
+  transition: color 0.3s, box-shadow 0.3s, height 0.3s, background-color 0.3s;
+}
+.nav a:hover {
+  color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  height: 30px;
+  background-color: #808085;
+  border-radius: 15px;
+  border-left: 1px solid #3b3b3b;
+}
+.nav .active {
+  color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  height: 30px;
+  background-color: #808085;
+  border-radius: 15px;
+  border-left: 1px solid #3b3b3b;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: 300;
+  margin-top: 24px;
+}
+
+.eCard {
+  display: grid;
+  grid-template-rows: min-content min-content auto 48px 84px;
+  grid-template-columns: 1fr 2fr;
+  border: 1px solid #b8b8b8;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  color: #444757;
+  padding: 10px;
+  position: relative;
+}
+.eCard__field2 {
+  width: 47%;
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
+}
+.eCard img {
+  grid-row: 1/6;
+}
+.eCard h2 {
+  margin: 10px 0px;
+  font-weight: 400;
+  font-size: 20px;
+}
+.eCard label {
+  font-size: 16px;
+  font-weight: 300;
+}
+.eCard input {
+  height: 28px;
+  width: 100%;
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #c2c2c2 !important;
+}
+.eCard input:valid {
+  background-color: #e8f0fe;
+  border: 1px solid #c2c2c2 !important;
+}
+.eCard input[type=number]::-webkit-inner-spin-button,
+.eCard input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.eCard input[type=number] {
+  /* Удаление полоски для слайдера Firefox */
+  -moz-appearance: textfield;
+}
+.eCard input:focus {
+  border-color: rgba(0, 0, 222, 0.758) !important; /* Цвет рамки при активации поля ввода */
+  outline: none; /* Убрать стандартный контур фокуса */
+}
+.eCard .description {
+  color: #3b3b3b;
+  font-weight: 300;
+  font-size: 14px;
+  text-align: justify;
+}
+.eCard .id {
+  display: grid;
+  color: #444757;
+  font-weight: 100;
+  font-size: 14px;
+  font-family: "Courier New", Courier, monospace;
+}
+.eCard .category {
+  display: grid;
+  color: #28f855;
+  font-weight: 100;
+  font-size: 14px;
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid red;
+}
+.eCard .price {
+  display: grid;
+  color: #3b3b3b;
+  font-weight: 300;
+  font-size: 16px;
+}
+.eCard__butBlock {
+  text-align: right;
+  margin-top: 20px;
+}
+.eCard a {
+  display: inline-block;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 14px;
+  line-height: 28px;
+  height: 28px;
+  width: 120px;
+  border: 1px solid #919191;
+  background-color: #dbdbdb;
+  color: #3b3b3b;
+  transition: box-shadow 0.3s, border 0.3s, background-color 0.3s;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  z-index: 99;
+}
+.eCard a:hover {
+  border: 1px solid #3b3b3b;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+.eCard button {
+  font-family: Roboto;
+  font-size: 16;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-align: center;
+  border-radius: 14px;
+  height: 28px;
+  width: 120px;
+  border: 1px solid #919191;
+  background-color: #dbdbdb;
+  color: #3b3b3b;
+  transition: box-shadow 0.3s, border 0.3s, background-color 0.3s;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  z-index: 99;
+}
+.eCard button:hover {
+  border: 1px solid #3b3b3b;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/*# sourceMappingURL=style.css.map */

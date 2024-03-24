@@ -1,0 +1,50 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+{{!-- <div class="nav">
+  <a href="/">/Start</a>
+  <a href="/product-create">/Product create</a>
+  <a href="/product-list" class="active">/Product list</a>
+  <a href="/product-edit">/Product edit</a>
+</div> --}}
+
+
+<h1>Product list</h1>
+
+<h3>computers and laptops / desktop computers</h3>
+
+
+{{!-- // ======================================== --}}
+{{#if isEmpty}}
+<p>The list is empty</p>
+{{/if}}
+
+{{!-- =========================================== --}}
+<div class="list">
+
+  {{#each list}}
+  <div class="mCard">
+    <img src="{{img}}" width="100%">
+    <h2>{{name}}</h2>
+    <p class="description">{{description}}</p>
+    {{!-- <p class="id">ID {{this.id}}</p> --}}
+    <p class="category">{{category}}</p>
+    <p class="price">{{price}}₴</p>
+    <a href="/eproduct-purchase?id={{id}}">Buy</a>
+  </div>
+  {{/each}}
+
+</div>
+{{!-- <div class="list">
+
+  {{#each list}}
+  <div class="mCard">
+    {{#each this}}
+    <p>{{@key}} {{this}}</p>
+    {{/each}}
+  </div>
+  {{/each}}
+
+</div> --}}

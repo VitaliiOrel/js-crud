@@ -1,0 +1,221 @@
+{{!-- purchase-create --}}
+
+
+
+{{!-- ===============purpose======================= --}}
+
+<div class="mCard">
+
+  <h2>Your order:</h2>
+
+  <div class="cardHeader">
+    <span><img src="{{img}}" alt="photo" width="50px" height="50px"> {{name}}</span>
+    <span>amount: {{amount}}</span>
+    <span>delivery: {{delivery}} ₴</span>
+    <span class="totalPrice"> Total price:&nbsp; <span id="totalPrice">{{totalPrice}}</span> ₴</span>
+  </div>
+
+  <h3>Your order details</h3>
+  <form method="POST" action="/confirm-order">
+
+    <div class="mCard__content">
+
+      <div class="mCard__field1">
+        <label for="firstname">Name</label>
+        <input type="text" name="firstname" required>
+      </div>
+
+      <div class="mCard__field2">
+        <label for="surname">Surname</label>
+        <input type="text" name="surname" required>
+      </div>
+
+      <div class="mCard__field3">
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" required>
+      </div>
+
+      <div class="mCard__field4">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="eMail" required>
+      </div>
+
+      <div class="mCard__field5">
+        <label for="comment">Comment (information for courier):</label>
+        <textarea type="text" name="comment" class="description" required></textarea>
+      </div>
+
+      <div class="mCard__field6">
+        <label for="bonusUse" id="lbl2">Use available bonuses to pay</label>
+        <input type="number" name="bonusUse" id="bonus">
+      </div>
+
+      <div class="mCard__field7">
+        <label for="promocode" id="lbl1">Promo code</label>
+        <input type="text" name="promocode" id="promo">
+      </div>
+
+    </div>
+
+    <input type="hidden" name="toPayForm" id="toPayForm">
+    <input type="hidden" name="totalPrice" value="{{totalPrice}}">
+    <input type="hidden" name="amount" value="{{amount}}">
+    <input type="hidden" name="id" value="{{id}}">
+
+    <div class="endForm">
+
+      <button>Confirm order</button>
+
+      <span class="totalInfo" id="totalInfo" name="toPay"></span>
+
+    </div>
+
+  </form>
+
+</div>
+
+{{!-- ============================================ --}}
+<script>
+  let inputed
+  let inputedBonus
+  let promoInfo
+  let eMail
+  let factorOff
+  const inputPromo = document.getElementById('promo')
+  const lbl1 = document.getElementById('lbl1')
+  const inputBonus = document.getElementById('bonus')
+  const lbl2 = document.getElementById('lbl2')
+  const inputMail = document.getElementById('eMail')
+  const totalInfo = document.getElementById('totalInfo')
+  const toPay = document.getElementById('totalPrice')
+  totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+  const toPayForm = document.getElementById('toPayForm')
+
+
+
+  inputPromo.addEventListener('input', function () {
+    inputed = inputPromo.value
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/check-input', true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText)
+          if (response.isValid) {
+            promoInfo = `Bingo! ${response.infoOff}`
+            lbl1.textContent = promoInfo
+            factorOff = response.factorOff
+            inputBonus.disabled = true
+
+            if (inputBonus.value !== '') {
+              inputBonus.value = ''
+            }
+
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) * Number(factorOff)} ₴`
+            toPayForm.value = Number(toPay.textContent) * Number(factorOff)
+
+          } else {
+            if (!inputed) {
+              lbl1.textContent = 'Promo code'
+              totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+              toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+              inputBonus.disabled = false
+            } else {
+              promoInfo = "Not valid "
+              lbl1.textContent = promoInfo
+              totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+              toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+              inputBonus.disabled = false
+            }
+          }
+        } else {
+          console.error("Ошибка при выполнении запроса Промокод")
+        }
+      }
+    }
+    xhr.send(JSON.stringify({ inputed }))
+  })
+
+  inputBonus.addEventListener('input', function () {
+    inputedBonus = inputBonus.value
+    let eMail = inputMail.value
+    const xhr = new XMLHttpRequest()
+    xhr.open('POST', '/check-inputBonus', true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText)
+          lbl2.textContent = response.value
+          if (inputedBonus <= response.realBonus) {
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+            toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+            if (toPayForm.value <= 0) {
+              toPayForm.value = 0
+              totalInfo.textContent = `Bingo! Present for You!`
+            }
+          }
+          if (inputedBonus > response.realBonus) {
+            inputBonus.value = response.realBonus
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+            toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+            if (toPayForm.value <= 0) {
+              toPayForm.value = 0
+              totalInfo.textContent = `Bingo! Present for You!`
+            }
+          }
+          if (inputedBonus < 0) {
+            inputBonus.value = - inputBonus.value
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+            toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+          }
+        } else {
+          console.error(
+            'Ошибка при выполнении запроса Бонусы',
+          )
+        }
+      }
+    }
+    xhr.send(JSON.stringify({ inputedBonus, eMail }))
+  })
+
+
+  inputMail.addEventListener('input', function () {
+    eMail = inputMail.value
+    inputedBonus = inputBonus.value
+    const xhr = new XMLHttpRequest()
+    xhr.open('POST', '/check-inputBonus', true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText)
+          lbl2.textContent = response.value
+          if (inputedBonus <= response.realBonus && !lbl1.textContent.includes('Bingo!')) {
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+            toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+          }
+          if (inputedBonus > response.realBonus) {
+            inputBonus.value = response.realBonus
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+            toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+          }
+          if (inputedBonus < 0) {
+            inputBonus.value = - inputBonus.value
+            totalInfo.textContent = `To pay -- ${Number(toPay.textContent) - Number(inputBonus.value)} ₴`
+            toPayForm.value = Number(toPay.textContent) - Number(inputBonus.value)
+          }
+        } else {
+          console.error(
+            'Ошибка при выполнении запроса Бонусы',
+          )
+        }
+      }
+    }
+    xhr.send(JSON.stringify({ inputedBonus, eMail }))
+  })
+
+
+</script>

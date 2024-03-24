@@ -1,0 +1,37 @@
+{{!-- ===== PURCHASE-LIST ================= --}}
+
+
+<h1>Your orders</h1>
+
+
+
+{{!-- // ======================================== --}}
+{{#if isEmpty}}
+<p>{{emptyInfo}}</p>
+{{/if}}
+
+{{!-- =========================================== --}}
+<div class="list">
+
+  <div class="pCard">
+    <div class="item">
+      <span>ID</span>
+      <span>Product</span>
+      <span>Price</span>
+      <span>To pay</span>
+    </div>
+    {{#each list}}
+    <a href="/purchase-info?id={{id}}">
+      <div class="item">
+        <span>{{id}}</span>
+        <span>{{product.name}}</span>
+        <span>{{productPrice}}</span>
+        <span>{{totalPrice}}</span>
+      </div>
+    </a>
+    {{/each}}
+  </div>
+
+  <a class="btn-x" href="/eproduct-list">To product list</a>
+
+</div>

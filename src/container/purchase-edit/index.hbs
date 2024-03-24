@@ -1,0 +1,73 @@
+{{!-- ===== PURCHASE-EDIT ================= --}}
+
+
+<h1>Edit order information</h1>
+
+
+
+
+{{!-- // ======================================== --}}
+{{#if isEmpty}}
+<p>{{emptyInfo}}</p>
+{{/if}}
+
+{{!-- =========================================== --}}
+<form method="POST" action="/confirm-orderchanges">
+  <div class="list">
+
+    <input type="hidden" name="id" value="{{id}}">
+
+    <div class="pCard">
+
+      {{#with purchase}}
+
+
+      <div class="item">
+        <span>ID {{id}}</span>
+      </div>
+
+
+      <div class="item">
+        <div class="field">
+          <label for="firstname">Name</label>
+          <input type="text" name="firstname" value="{{firstname}}" required>
+        </div>
+        {{!-- <span>Name {{firstname}}</span> --}}
+        {{!-- <span>Surname {{surname}}</span> --}}
+        <div class="field">
+          <label for="firstname">Surname</label>
+          <input type="text" name="surname" value="{{surname}}" required>
+        </div>
+        {{!-- <span>Phone {{phone}}</span> --}}
+        <div class="field">
+          <label for="firstname">Phone</label>
+          <input type="text" name="phone" value="{{phone}}" required>
+        </div>
+        {{!-- <span>email {{email}}</span> --}}
+        <div class="field">
+          <label for="firstname">email</label>
+          <input type="text" name="email" value="{{email}}" required>
+        </div>
+      </div>
+
+      <div class="item">
+        <span class="double">Product {{product.name}}</span>
+        <span class="double">Comment {{comment}}</span>
+      </div>
+
+      <div class="item">
+        <span>Total price {{productPrice}} ₴</span>
+        <span>Delivery {{deliveryPrice}} ₴</span>
+        <span>To pay {{totalPrice}} ₴</span>
+        <span>Added bonuses {{bonus}}</span>
+      </div>
+
+      {{/with}}
+
+      <div class="btn-block">
+        <a href="/purchase-info?id={{id}}">Cancel</a>
+        <button>Confirm order</button>
+      </div>
+
+    </div>
+</form>
