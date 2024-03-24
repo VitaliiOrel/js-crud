@@ -1,0 +1,49 @@
+h1 {
+  font-size: 42px;
+  font-weight: 300;
+  margin-top: 24px;
+}
+
+.mCard {
+  border: 1px solid #b8b8b8;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  color: #444757;
+  padding: 10px;
+}
+.mCard h2 {
+  margin: 10px 10px;
+  font-weight: 300;
+  font-size: 28px;
+}
+.mCard span {
+  margin-left: 15px;
+  font-size: 12px;
+  font-weight: 300;
+}
+.mCard__butBlock {
+  text-align: right;
+  margin-top: 20px;
+}
+.mCard a {
+  display: inline-block;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 14px;
+  line-height: 28px;
+  height: 28px;
+  width: 180px;
+  border: 1px solid #919191;
+  background-color: #dbdbdb;
+  color: #3b3b3b;
+  transition: box-shadow 0.3s, border 0.3s, background-color 0.3s;
+}
+.mCard a:hover {
+  border: 1px solid #3b3b3b;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,28 @@
+<div>
+  <h1>Success!</h1>
+</div>
+
+<div class="mCard">
+
+  <h2>{{info}}</h2>
+  <span>ID:{{id}} DATE: {{purchase.date}}</span>
+
+  {{#each purchase}}
+  {{#if (eq @key "product")}}
+  {{#each this}}
+  <span>{{@key}}:{{this}}</span>
+  <br>
+  {{/each}}
+  {{else}}
+  <span>{{@key}}:{{this}}</span>
+  <br>
+  {{/if}}
+  {{/each}}
+
+  <div class="mCard__butBlock">
+    <a href="/">Start</a>
+    <a href="/eproduct-list">To product list</a>
+    <a href="/purchase-list">To purchase list</a>
+  </div>
+
+</div>

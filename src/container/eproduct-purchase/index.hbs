@@ -1,0 +1,41 @@
+{{!-- Product&amount => Buy ; /eproduct-purchase --}}
+
+
+<h1>Buy</h1>
+
+
+<div class="list">
+
+  <div class="eCard">
+
+    <img src="{{img}}" width="100%">
+    <h2>{{name}}</h2>
+    <p class="description">{{description}}</p>
+    {{!-- <p class="id">ID {{id}}</p> --}}
+    {{!-- <p class="category">{{category}}</p> --}}
+    <p class="price">{{price}}₴</p>
+    {{!-- <a href="/eproduct-purchase?id={{id}}">Buy</a> --}}
+    <form method="POST" action="/purchase-create">
+
+      <input type="hidden" name="id" value="{{id}}">
+
+      <div class="mCard__content">
+
+        <div class="eCard__field2">
+          <label for="amount">Amount:</label>
+          <input type="number" name="amount" required min="1" value="1">
+        </div>
+
+      </div>
+      <button>Buy</button>
+    </form>
+
+  </div>
+
+</div>
+
+<div class="eCard">
+
+  <h2>Product information</h2>
+
+</div>
